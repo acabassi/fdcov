@@ -1,7 +1,7 @@
 # fdcov
 
-This is a read-only mirror of the CRAN R package repository.  fdcov — Analysis of Covariance Operators  
-https://cran.r-project.org/web/packages/fdcov/index.html
+R package for the Analysis of Covariance Operators.  
+v 1.0 is available on CRAN:  https://cran.r-project.org/web/packages/fdcov/index.html
 
 This package contains a collection of tools for performing statistical inference on functional data
 specifically through an analysis of the covariance structure of the data. It includes two methods
@@ -17,8 +17,10 @@ Author(s):
 Alessandra Cabassi <ac2051@cam.ac.uk>, Adam B Kashlak <ak852@cam.ac.uk>
 
 References:
+
 Kashlak, Adam B, John AD Aston, and Richard Nickl (2016). "Inference on covariance operators
 via concentration inequalities: k-sample tests, classification, and clustering via Rademacher
 complexities", April, 2016 (in review)
+
 Pigoli, Davide, John AD Aston, Ian L Dryden, and Piercesare Secchi. "Distances and inference for
 covariance operators." Biometrika (2014): asu008.
