@@ -13,7 +13,7 @@ The current version of this package assumes that all functional data is sampled 
 the same intervals. Future updates are planned to allow for the below methods to interface with the
 fda package and its functional basis representations of the data.
 
-Author(s): 
+Authors: 
 
 Alessandra Cabassi <ac2051@cam.ac.uk>, Adam B Kashlak <ak852@cam.ac.uk>
 
