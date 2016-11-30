@@ -14,6 +14,7 @@ the same intervals. Future updates are planned to allow for the below methods to
 fda package and its functional basis representations of the data.
 
 Author(s): 
+
 Alessandra Cabassi <ac2051@cam.ac.uk>, Adam B Kashlak <ak852@cam.ac.uk>
 
 References:
