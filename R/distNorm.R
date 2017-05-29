@@ -7,7 +7,7 @@
 # 
 # @param mat1 First covariance matrix
 # @param mat2 Second covariance matrix
-# @param dist Distance between covariance operators. Can be 'sq' (square-root), 'tr' (trace),'pr' (Procrustes), 'hs'(Hilbert-Schmidt) or 'op' (operator).
+# @param dist Distance between covariance operators. Can be 'sq' (square-root), 'tr' (trace), 'pr' (Procrustes), 'hs'(Hilbert-Schmidt), 'nu' (nuclear) or 'op' (operator).
 # @return Distance.
 # 
 # @author Adam B Kashlak \email{ak852@cam.ac.uk}
@@ -20,6 +20,7 @@ distCov <- function( mat1, mat2, type )
      tr = distTrac(mat1,mat2),
      pr = distProc(mat1,mat2),
      hs = distHsno(mat1,mat2),
+     nu = distNucl(mat1,mat2),
      op = distOper(mat1,mat2)
    );
 }
@@ -99,6 +100,20 @@ distProc <- function( mat1, mat2 )
   svdC  = svd(matC);
   matR  = svdC$u%*%t(svdC$v);
   return( pschnorm( smat1-smat2%*%matR, 2 ) );
+}
+
+# Nuclear distance norm
+# 
+# @param mat1 First covariance matrix
+# @param mat2 Second covariance matrix
+# 
+# @author Alessandra Cabassi \email{ac2051@cam.ac.uk}
+# 
+# @export
+# 
+distNucl <- function( mat1, mat2 )
+{
+  return( pschnorm( mat1-mat2, 1 ) );
 }
 
 ###########
