@@ -1,7 +1,7 @@
 Package: fdcov
 Title: Analysis of Covariance Operators
 Version: 1.0.1
-Authors@R: c(person(given="Alessandra", family="Cabassi", email = ac2051@cam.ac.uk", role = c("aut")),
+Authors@R: c(person(given="Alessandra", family="Cabassi", email = "ac2051@cam.ac.uk", role = c("aut")),
              person(given="Adam B", family="Kashlak", email = "ak852@cam.ac.uk", role = c("aut", "cre")),
              person(given="Davide", family="Pigoli", email = "dp497@cam.ac.uk", role = c("ctb")))
 Author: Alessandra Cabassi [aut],
