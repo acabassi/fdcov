@@ -170,12 +170,8 @@ pschnorm <- function( sig, p )
 # 
 sqrtMat <-function(A)
 {
-  eig = eigen( A );
-  val = eig$values;
-  #val = pmax( eig$values, rep(0,nrow(A)) );
-  d   = sqrt( as.complex(val) );
-  D   = diag( d );
-  V   = eig$vectors;
-  return( V%*%D%*%t(V) );
+  svdA= svd( A );
+  D   = diag( sqrt(svdA$d) );
+  return( svdA$u %*% D %*% t(svdA$v) )
 }
 
