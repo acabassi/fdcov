@@ -6,19 +6,19 @@
 \alias{fdcov-package}
 \title{Analysis of Covariance Operators.}
 \description{
-\code{fdcov} provides a variety of tools for the analysis of 
+\code{fdcov} provides a variety of tools for the analysis of
 covariance operators.
 }
 \details{
-This package contains a collection of tools for performing 
+This package contains a collection of tools for performing
 statistical inference on functional data specifically through
 an analysis of the covariance structure of the data.  It includes
-two methods for performing a k-sample test for equality 
+two methods for performing a k-sample test for equality
 of covariance in \code{ksample.perm} and \code{ksample.com}.
 For supervised and unsupervised learning,
-it contains a method to classify functional data with 
-respect to each category's covariance operator in 
-\code{classif.com}, 
+it contains a method to classify functional data with
+respect to each category's covariance operator in
+\code{classif.com},
 and it contains a method to cluster functional data, \code{cluster.com},
 again based on the covariance structure of the data.
 
@@ -34,13 +34,13 @@ Kashlak, Adam B, John AD Aston, and Richard Nickl (2016).
   inequalities: k-sample tests, classification, and clustering via
   Rademacher complexities", April, 2016 (in review)
 
-  Pigoli, Davide, John AD Aston, Ian L Dryden, and Piercesare Secchi. 
-  "Distances and inference for covariance operators." 
+  Pigoli, Davide, John AD Aston, Ian L Dryden, and Piercesare Secchi.
+  "Distances and inference for covariance operators."
   Biometrika (2014): 101(2):409–422.
 
-  Panaretos, Victor M., David Kraus, and John H. Maddocks. 
-  "Second-order comparison of Gaussian random functions and the 
-  geometry of DNA minicircles." Journal of the American Statistical 
+  Panaretos, Victor M., David Kraus, and John H. Maddocks.
+  "Second-order comparison of Gaussian random functions and the
+  geometry of DNA minicircles." Journal of the American Statistical
   Association 105.490 (2010): 670-682.
 }
 \seealso{
