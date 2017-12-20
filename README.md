@@ -1,12 +1,12 @@
 # fdcov
 
-R package for the Analysis of Covariance Operators.  
+R�package for the Analysis of Covariance Operators.
 v 1.0 is available on CRAN:  https://cran.r-project.org/web/packages/fdcov/index.html
 
-This package contains a collection of tools for performing statistical inference on functional data specifically through an analysis of the covariance structure of the data. It includes two methods for performing a k-sample test for equality of covariance in ksample.perm and ksample.com. For supervised and unsupervised learning, it contains a method to classify functional data with respect to each category’s covariance operator in classif.com, and it contains a method to cluster functional data, cluster.com, again based on the covariance structure of the data.
+This package contains a collection of tools for performing statistical inference on functional data specifically through an analysis of the covariance structure of the data. It includes two methods for performing a k-sample test for equality of covariance in ksample.perm and ksample.com. For supervised and unsupervised learning, it contains a method to classify functional data with respect to each category's covariance operator in classif.com, and it contains a method to cluster functional data, cluster.com, again based on the covariance structure of the data.
 The current version of this package assumes that all functional data is sampled on the same grid at the same intervals. Future updates are planned to allow for the below methods to interface with the fda package and its functional basis representations of the data.
 
-Authors: 
+Authors:
 
 Alessandra Cabassi <ac2051@cam.ac.uk>, Adam B Kashlak <kashlak@ualberta.ca>
 

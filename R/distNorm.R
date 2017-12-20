@@ -4,15 +4,15 @@
 ###########################
 
 # General distances function
-# 
+#
 # @param mat1 First covariance matrix
 # @param mat2 Second covariance matrix
-# @param dist Distance between covariance operators. Can be 'sq' (square-root), 'tr' (trace), 'pr' (Procrustes), 'hs'(Hilbert-Schmidt), 'nu' (nuclear) or 'op' (operator).
+# @param dist Distance between covariance operators. Can be 'sq' (square-root), 'tr' (trace),'pr' (Procrustes), 'hs'(Hilbert-Schmidt) or 'op' (operator).
 # @return Distance.
-# 
-# @author Adam B Kashlak \email{ak852@cam.ac.uk}
-# 
-# 
+#
+# @author Adam B Kashlak \email{kashlak@ualberta.ca}
+#
+#
 distCov <- function( mat1, mat2, type )
 {
    switch( type,
@@ -20,62 +20,61 @@ distCov <- function( mat1, mat2, type )
      tr = distTrac(mat1,mat2),
      pr = distProc(mat1,mat2),
      hs = distHsno(mat1,mat2),
-     nu = distNucl(mat1,mat2),
      op = distOper(mat1,mat2)
    );
 }
 
 # Trace Class distance
-# 
+#
 # @param mat1 First covariance matrix
 # @param mat2 Second covariance matrix
-# 
-# @author Adam B Kashlak \email{ak852@cam.ac.uk}
-# 
+#
+# @author Adam B Kashlak \email{kashlak@ualberta.ca}
+#
 # @export
-# 
+#
 distTrac <- function( mat1, mat2 )
 {
   return( pschnorm( mat1-mat2,1 ) );
 }
 
 # Hilbert-Schmidt distance
-# 
+#
 # @param mat1 First covariance matrix
 # @param mat2 Second covariance matrix
-# 
-# @author Adam B Kashlak \email{ak852@cam.ac.uk}
-# 
+#
+# @author Adam B Kashlak \email{kashlak@ualberta.ca}
+#
 # @export
-# 
+#
 distHsno <- function( mat1, mat2 )
 {
   return( pschnorm( mat1-mat2, 2 ) );
 }
 
 # Operator norm distance
-# 
+#
 # @param mat1 First covariance matrix
 # @param mat2 Second covariance matrix
-# 
-# @author Adam B Kashlak \email{ak852@cam.ac.uk}
-# 
+#
+# @author Adam B Kashlak \email{kashlak@ualberta.ca}
+#
 # @export
-# 
+#
 distOper <- function( mat1, mat2 )
 {
   return( pschnorm( mat1-mat2, -1 ) );
 }
 
 # Square Root distance
-# 
+#
 # @param mat1 First covariance matrix
 # @param mat2 Second covariance matrix
-# 
-# @author Adam B Kashlak \email{ak852@cam.ac.uk}
-# 
+#
+# @author Adam B Kashlak \email{kashlak@ualberta.ca}
+#
 # @export
-# 
+#
 distSqrt <- function( mat1, mat2 )
 {
   smat1 = sqrtMat(mat1);
@@ -84,14 +83,14 @@ distSqrt <- function( mat1, mat2 )
 }
 
 # Procrustes distance
-# 
+#
 # @param mat1 First covariance matrix
 # @param mat2 Second covariance matrix
-# 
-# @author Adam B Kashlak \email{ak852@cam.ac.uk}
-# 
+#
+# @author Adam B Kashlak \email{kashlak@ualberta.ca}
+#
 # @export
-# 
+#
 distProc <- function( mat1, mat2 )
 {
   smat1 = sqrtMat(mat1);
@@ -102,50 +101,36 @@ distProc <- function( mat1, mat2 )
   return( pschnorm( smat1-smat2%*%matR, 2 ) );
 }
 
-# Nuclear distance norm
-# 
-# @param mat1 First covariance matrix
-# @param mat2 Second covariance matrix
-# 
-# @author Alessandra Cabassi \email{ac2051@cam.ac.uk}
-# 
-# @export
-# 
-distNucl <- function( mat1, mat2 )
-{
-  return( pschnorm( mat1-mat2, 1 ) );
-}
-
 ###########
 #  Norms  #
 ###########
 
 # Hilbert-Schmidt (Frobenius) Norm
-# 
+#
 # @param sig covariance matrix (i.e. symmetric positive definite)
-# 
+#
 # @param HS Norm of sig
-# 
-# @author Adam B Kashlak \email{ak852@cam.ac.uk}
-# 
+#
+# @author Adam B Kashlak \email{kashlak@ualberta.ca}
+#
 # @export
-# 
+#
 hsnorm <- function( sig )
 {
   return(sqrt(sum(abs(sig)^2)));
 }
 
 # p-Schatten Norm
-# 
+#
 # @param sig covariance matrix (i.e. symmetric positive definite)
 # @param p   [1,Inf] or 1/2
-# 
+#
 # @return p-Schatten Norm of sig
-# 
-# @author Adam B Kashlak \email{ak852@cam.ac.uk}
-# 
+#
+# @author Adam B Kashlak \email{kashlak@ualberta.ca}
+#
 # @export
-# 
+#
 pschnorm <- function( sig, p )
 {
   if( p==2 )
@@ -159,19 +144,18 @@ pschnorm <- function( sig, p )
 }
 
 # Computes Square Root of matrix A
-# 
+#
 # @param A matrix
-# 
+#
 # @return Square root of A
-# 
-# @author Adam B Kashlak \email{ak852@cam.ac.uk}
-# 
+#
+# @author Adam B Kashlak \email{kashlak@ualberta.ca}
+#
 # @export
-# 
+#
 sqrtMat <-function(A)
 {
-  svdA= svd( A );
-  D   = diag( sqrt(svdA$d) );
-  return( svdA$u %*% D %*% t(svdA$v) )
+    svdA= svd( A );
+    D   = diag( sqrt(svdA$d) );
+    return( svdA$u %*% D %*% t(svdA$v) )
 }
-

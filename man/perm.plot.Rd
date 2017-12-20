@@ -44,10 +44,9 @@ perm.plot(p,5, lab=c('aa','ao','dcl','iy','sh'))
 }
 
 }
+\references{
+Pigoli, Davide, John A. D. Aston, Ian L. Dryden, and Piercesare Secchi (2014). "Distances and inference for covariance operators." Biometrika: 101(2):409–422.
+}
 \author{
 Alessandra Cabassi \email{alessandra.cabassi@mail.polimi.it}
 }
-\references{
-Pigoli, Davide, John A. D. Aston, Ian L. Dryden, and Piercesare Secchi (2014). "Distances and inference for covariance operators." Biometrika: asu008.
-}
-

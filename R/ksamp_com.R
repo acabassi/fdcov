@@ -41,7 +41,7 @@
 #'   "Inference on covariance operators via concentration
 #'   inequalities: k-sample tests, classification, and clustering via
 #'   Rademacher complexities", (in review)
-#' @author Adam B Kashlak \email{ak852@cam.ac.uk}
+#' @author Adam B Kashlak \email{kashlak@ualberta.ca}
 #' @examples
 #' # Load in phoneme data
 #' library(fds)

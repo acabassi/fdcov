@@ -12,7 +12,7 @@
 #' 
 #' @author Alessandra Cabassi \email{alessandra.cabassi@mail.polimi.it}
 #' 
-#' @references Pigoli, Davide, John A. D. Aston, Ian L. Dryden, and Piercesare Secchi (2014). "Distances and inference for covariance operators." Biometrika: asu008.
+#' @references Pigoli, Davide, John A. D. Aston, Ian L. Dryden, and Piercesare Secchi (2014). "Distances and inference for covariance operators." Biometrika: 101(2):409–422.
 #'
 #' @examples 
 #' \dontrun{

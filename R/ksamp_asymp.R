@@ -1,32 +1,31 @@
-
 #' k-sample test for equality of covariance operators
 #'
 #' \code{ksample.gauss} performs a k-sample test for equality
 #' of covariance operators under the assumption that the
 #' data arises from a Gaussian process.
-#' 
-#' \code{ksample.vstab} applies a similar method that has 
+#'
+#' \code{ksample.vstab} applies a similar method that has
 #' been modified to stabilize the variance.  See the reference
 #' paper for more details on the mathematics of these methods.
 #'
-#' These two methods use the Karhunen-Loeve expansion 
-#' (eigen expansion for functional data) to represent 
+#' These two methods use the Karhunen-Loeve expansion
+#' (eigen expansion for functional data) to represent
 #' the data in terms of K eigen-functions.  Then a
 #' test statistic with asymptotic chi-squared distribution
-#' is computed in order to test for the equality of the 
+#' is computed in order to test for the equality of the
 #' covariance operators based on the two samples.
 #' If K is set to be 0, then the methods determine the
 #' number of eigen-functions to retain.
-#' 
+#'
 #' @param  dat1 the first set of data with one entry per row
 #' @param  dat2 the second set of data with one entry per row
 #' @param  K the number of basis vectors to use, Default is 5.
-#' @return p-value testing whether or not the two samples have 
+#' @return p-value testing whether or not the two samples have
 #' differing covariance operators.
 #' @references
-#' Panaretos, Victor M., David Kraus, and John H. Maddocks. 
-#' "Second-order comparison of Gaussian random functions and the 
-#' geometry of DNA minicircles." Journal of the American Statistical 
+#' Panaretos, Victor M., David Kraus, and John H. Maddocks.
+#' "Second-order comparison of Gaussian random functions and the
+#' geometry of DNA minicircles." Journal of the American Statistical
 #' Association 105.490 (2010): 670-682.
 #' @author Adam B Kashlak \email{kashlak@ualberta.ca}
 #' @examples
@@ -40,14 +39,14 @@
 #' # Resulting in a small p-value
 #' ksample.gauss(dat1,dat2,K=5);
 #' ksample.vstab(dat1,dat2,K=5);
-#' # Compare two sets of the same phonemes 
+#' # Compare two sets of the same phonemes
 #' # Resulting in a large p-value
 #' ksample.gauss(dat1,dat3,K=5);
 #' ksample.vstab(dat1,dat3,K=5);
 #' @export
-
-ksample.gauss <- function( 
-  dat1, dat2, K=5  
+#'
+ksample.gauss <- function(
+  dat1, dat2, K=5
 ){
   # Centre data
   dat1 = t(t(dat1)-apply(dat1,2,mean));
@@ -74,9 +73,9 @@ ksample.gauss <- function(
       gof  = sum((prj1-dat1)^2) + sum((prj2-dat2)^2);
       ip1  = (prj1 %*% eig1$vectors)^2/eig1$values;
       ip2  = (prj2 %*% eig2$vectors)^2/eig2$values;
-      pen  = 2*( 
+      pen  = 2*(
         sum(eig1$values)*sum(ip1)/n1 +
-        sum(eig2$values)*sum(ip2)/n2 
+        sum(eig2$values)*sum(ip2)/n2
       );
       pfc_scores[K] = gof + pen;
     }
@@ -103,8 +102,55 @@ ksg_projData <- function( dat, vec ){
   return( (dat %*% vec) %*% t(vec) );
 }
 
-ksample.vstab <- function( 
-  dat1, dat2, K=5  
+#' k-sample test for equality of covariance operators
+#'
+#' \code{ksample.gauss} performs a k-sample test for equality
+#' of covariance operators under the assumption that the
+#' data arises from a Gaussian process.
+#'
+#' \code{ksample.vstab} applies a similar method that has
+#' been modified to stabilize the variance.  See the reference
+#' paper for more details on the mathematics of these methods.
+#'
+#' These two methods use the Karhunen-Loeve expansion
+#' (eigen expansion for functional data) to represent
+#' the data in terms of K eigen-functions.  Then a
+#' test statistic with asymptotic chi-squared distribution
+#' is computed in order to test for the equality of the
+#' covariance operators based on the two samples.
+#' If K is set to be 0, then the methods determine the
+#' number of eigen-functions to retain.
+#'
+#' @param  dat1 the first set of data with one entry per row
+#' @param  dat2 the second set of data with one entry per row
+#' @param  K the number of basis vectors to use, Default is 5.
+#' @return p-value testing whether or not the two samples have
+#' differing covariance operators.
+#' @references
+#' Panaretos, Victor M., David Kraus, and John H. Maddocks.
+#' "Second-order comparison of Gaussian random functions and the
+#' geometry of DNA minicircles." Journal of the American Statistical
+#' Association 105.490 (2010): 670-682.
+#' @author Adam B Kashlak \email{kashlak@ualberta.ca}
+#' @examples
+#' # Load in phoneme data
+#' library(fds)
+#' # Set up test data
+#' dat1 = t(aa$y)[1:20,];
+#' dat2 = t(sh$y)[1:20,];
+#' dat3 = t(aa$y)[21:40,];
+#' # Compare two disimilar phonemes
+#' # Resulting in a small p-value
+#' ksample.gauss(dat1,dat2,K=5);
+#' ksample.vstab(dat1,dat2,K=5);
+#' # Compare two sets of the same phonemes
+#' # Resulting in a large p-value
+#' ksample.gauss(dat1,dat3,K=5);
+#' ksample.vstab(dat1,dat3,K=5);
+#' @export
+#'
+ksample.vstab <- function(
+  dat1, dat2, K=5
 ){
   # Centre data
   dat1 = t(t(dat1)-apply(dat1,2,mean));
@@ -134,7 +180,7 @@ ksample.vstab <- function(
   dprod1= sqrt(outer(diag(ev1),diag(ev1)));
   dprod2= sqrt(outer(diag(ev2),diag(ev2)));
   tstat2= ((
-    log((dprod1+ev1)/(dprod1-ev1)) - 
+    log((dprod1+ev1)/(dprod1-ev1)) -
     log((dprod2+ev2)/(dprod2-ev2))
   )/2)^2;
   tstat2= sum( tstat2*upper.tri(tstat2),na.rm=TRUE );

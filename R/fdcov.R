@@ -23,7 +23,7 @@
 #' 
 #' @author 
 #' Alessandra Cabassi \email{alessandra.cabassi@mail.polimi.it},
-#' Adam B Kashlak \email{ak852@cam.ac.uk}
+#' Adam B Kashlak \email{kashlak@ualberta.ca}
 #' @references
 #'   Kashlak, Adam B, John AD Aston, and Richard Nickl (2016).
 #'   "Inference on covariance operators via concentration
@@ -32,7 +32,12 @@
 #'
 #'   Pigoli, Davide, John AD Aston, Ian L Dryden, and Piercesare Secchi. 
 #'   "Distances and inference for covariance operators." 
-#'   Biometrika (2014): asu008.
+#'   Biometrika (2014): 101(2):409–422.
+#'
+#'   Panaretos, Victor M., David Kraus, and John H. Maddocks. 
+#'   "Second-order comparison of Gaussian random functions and the 
+#'   geometry of DNA minicircles." Journal of the American Statistical 
+#'   Association 105.490 (2010): 670-682.
 #' @importFrom grDevices dev.off postscript setEPS
 #' @importFrom stats cov qnorm rbinom rgamma sd
 #' @importFrom utils setTxtProgressBar txtProgressBar 

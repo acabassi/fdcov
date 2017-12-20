@@ -68,10 +68,9 @@ grp = c(rep(1,20),rep(2,20),rep(3,20),rep(4,20),rep(5,20))
 p = ksample.perm(dat,grp,iter=2)
 }
 }
+\references{
+Pigoli, Davide, John A. D. Aston, Ian L. Dryden, and Piercesare Secchi (2014). "Distances and inference for covariance operators." Biometrika: 101(2):409–422.
+}
 \author{
 Alessandra Cabassi \email{alessandra.cabassi@mail.polimi.it}
 }
-\references{
-Pigoli, Davide, John A. D. Aston, Ian L. Dryden, and Piercesare Secchi (2014). "Distances and inference for covariance operators." Biometrika: asu008.
-}
-
