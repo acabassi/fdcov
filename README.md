@@ -8,16 +8,12 @@ The current version of this package assumes that all functional data is sampled 
 
 Authors: 
 
-Alessandra Cabassi <ac2051@cam.ac.uk>, Adam B Kashlak <kashlak@ualberta.ca>
-
-Contributors:
-
-Davide Pigoli <davide.pigoli@kcl.ac.uk>
+Alessandra Cabassi <ac2051@cam.ac.uk>, Adam B Kashlak <ak852@cam.ac.uk>
 
 References:
-
-Cabassi, A., Pigoli, D., Secchi, P. and Carter, P.A., 2017. Permutation tests for the equality of covariance operators of functional data with applications to evolutionary biology. Electronic Journal of Statistics, 11(2), pp.3815-3840.
 
 Kashlak, A.B., Aston, J.A. and Nickl, R., 2016. Inference on covariance operators via concentration inequalities: k-sample tests, classification, and clustering via Rademacher complexities. arXiv preprint arXiv:1604.06310.
 
 Pigoli, D., Aston, J.A., Dryden, I.L. and Secchi, P., 2014. Distances and inference for covariance operators. Biometrika, 101(2), pp.409-422.
+
+Cabassi, A., Pigoli, D., Secchi, P. and Carter, P.A., 2017. Permutation tests for the equality of covariance operators of functional data with applications to evolutionary biology. arXiv preprint arXiv:1701.05870.
