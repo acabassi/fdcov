@@ -43,6 +43,14 @@ Kashlak, Adam B, John AD Aston, and Richard Nickl (2016).
   geometry of DNA minicircles." Journal of the American Statistical 
   Association 105.490 (2010): 670-682.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/acabassi/fdcov}
+  \item Report bugs at \url{https://github.com/acabassi/fdcov/issues}
+}
+
+}
 \author{
 Alessandra Cabassi \email{alessandra.cabassi@mail.polimi.it},
 Adam B Kashlak \email{kashlak@ualberta.ca}
