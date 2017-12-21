@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="Adam B. Kashlak, Alessandra Cabassi" />
+
+<meta name="date" content="2017-12-21" />
+
+<title>R package fdcov</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+
+
+<link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23header%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%20code%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">R package fdcov</h1>
+<h4 class="author"><em>Adam B. Kashlak, Alessandra Cabassi</em></h4>
+<h4 class="date"><em>2017-12-21</em></h4>
+
+
+<div id="TOC">
+<ul>
+<li><a href="#k-sample-test-for-the-equality-of-covariance-operators"><span class="toc-section-number">1</span> k-sample test for the equality of covariance operators</a><ul>
+<li><a href="#concentration-inequality-test"><span class="toc-section-number">1.1</span> Concentration Inequality test</a></li>
+<li><a href="#permutation-test"><span class="toc-section-number">1.2</span> Permutation test</a></li>
+<li><a href="#two-sample-tests-for-gaussian-data"><span class="toc-section-number">1.3</span> Two sample tests for Gaussian data</a></li>
+</ul></li>
+<li><a href="#classification"><span class="toc-section-number">2</span> Classification</a></li>
+<li><a href="#clustering"><span class="toc-section-number">3</span> Clustering</a></li>
+<li><a href="#references"><span class="toc-section-number">4</span> References</a></li>
+</ul>
+</div>
+
+<p>The R package <code>fdcov</code> (<strong>F</strong>unctional <strong>D</strong>ata <strong>Cov</strong>ariance) contains a collection of tools for performing statistical inference on functional data specifically through an analysis of the covariance structure of the data. It includes two methods for performing a k-sample test for equality of covariance in <code>ksample.perm</code> and <code>ksample.com</code> and two methods for performing a 2-sample test <code>ksample.gauss</code> and <code>ksample.vstab</code>. For supervised and unsupervised learning, it contains a method to classify functional data with respect to each category’s covariance operator in <code>classif.com</code>, and it contains a method to cluster functional data, <code>cluster.com</code>, again based on the covariance structure of the data.</p>
+<p>The current version of this package assumes that all functional data is sampled on the same grid at the same intervals. Future updates are planned to allow for the below methods to interface with the fda package and its functional basis representations of the data.</p>
+<div id="k-sample-test-for-the-equality-of-covariance-operators" class="section level1">
+<h1><span class="header-section-number">1</span> k-sample test for the equality of covariance operators</h1>
+<p>There are two methods for performing a k-sample test for equality of covariance operators.</p>
+<div id="concentration-inequality-test" class="section level2">
+<h2><span class="header-section-number">1.1</span> Concentration Inequality test</h2>
+<p><code>ksample.com</code> uses concentration inequalities to test for equality of covariance operator in the non-asymptotic setting from Kashlak et al. (2017). We use a subset of the data contained in the phoneme dataset from the R package <code>fds</code> to illustrate how to use this function.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Load fdcov package</span>
+<span class="kw">library</span>(fdcov)
+<span class="co"># Load in phoneme data</span>
+<span class="kw">library</span>(fds)
+<span class="co"># Setup data arrays</span>
+dat1 =<span class="st"> </span><span class="kw">rbind</span>( <span class="kw">t</span>(aa$y)[<span class="dv">1</span>:<span class="dv">20</span>,], <span class="kw">t</span>(sh$y)[<span class="dv">1</span>:<span class="dv">20</span>,] );
+dat2 =<span class="st"> </span><span class="kw">rbind</span>( <span class="kw">t</span>(aa$y)[<span class="dv">1</span>:<span class="dv">20</span>,], <span class="kw">t</span>(ao$y)[<span class="dv">1</span>:<span class="dv">20</span>,] );
+dat3 =<span class="st"> </span><span class="kw">rbind</span>( dat1, <span class="kw">t</span>(ao$y)[<span class="dv">1</span>:<span class="dv">20</span>,] );
+<span class="co"># Setup group labels</span>
+grp1 =<span class="st"> </span><span class="kw">gl</span>(<span class="dv">2</span>,<span class="dv">20</span>);
+grp2 =<span class="st"> </span><span class="kw">gl</span>(<span class="dv">2</span>,<span class="dv">20</span>);
+grp3 =<span class="st"> </span><span class="kw">gl</span>(<span class="dv">3</span>,<span class="dv">20</span>);</code></pre></div>
+<p>This function takes as arguments a data matrix with one entry per row. The second argument contains the labels identifying which entries in the data matrix belong to which group.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Compare two disimilar phonemes (should return TRUE)</span>
+<span class="kw">ksample.com</span>(dat1,grp1);</code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Compare two similar phonemes (should return FALSE)</span>
+<span class="kw">ksample.com</span>(dat2,grp2);</code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Compare three phonemes (should return TRUE)</span>
+<span class="kw">ksample.com</span>(dat3,grp3);</code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<p>A boolean variable is returned indicating whether or not the test believes the covariance operators differ significantly. This test is fast to compute, but inherently conservative. As a result, the two scale arguments can be used to tweak the test as detailed in Kashlak et al. (2017). The default test size is alpha = 0.05. This can also be modified as an argument to the above functions.</p>
+</div>
+<div id="permutation-test" class="section level2">
+<h2><span class="header-section-number">1.2</span> Permutation test</h2>
+<p><code>ksample.perm</code> can be used to perform the metric-based permutation test for the equality of covariance operators of Cabassi et al. (2017). Again, we use a subset of the data contained in the phoneme dataset from the R package <code>fds</code> to illustrate how to use this function.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Create data set
+<span class="co"># Load data</span>
+<span class="kw">data</span>(aa); <span class="kw">data</span>(ao); <span class="kw">data</span>(dcl); <span class="kw">data</span>(iy); <span class="kw">data</span>(sh) 
+<span class="co"># Select 20 observations from each dataset</span>
+dat =<span class="st"> </span><span class="kw">cbind</span>(aa$y[,<span class="dv">1</span>:<span class="dv">20</span>],ao$y[,<span class="dv">1</span>:<span class="dv">20</span>],dcl$y[,<span class="dv">1</span>:<span class="dv">20</span>],iy$y[,<span class="dv">1</span>:<span class="dv">20</span>],sh$y[,<span class="dv">1</span>:<span class="dv">20</span>]) 
+<span class="co"># Input matrix must be of size N (number of observations) X P (number of time points)</span>
+dat =<span class="st"> </span><span class="kw">t</span>(dat)
+<span class="co"># Define cluster labels</span>
+grp =<span class="st"> </span><span class="kw">c</span>(<span class="kw">rep</span>(<span class="dv">1</span>,<span class="dv">20</span>),<span class="kw">rep</span>(<span class="dv">2</span>,<span class="dv">20</span>),<span class="kw">rep</span>(<span class="dv">3</span>,<span class="dv">20</span>),<span class="kw">rep</span>(<span class="dv">4</span>,<span class="dv">20</span>),<span class="kw">rep</span>(<span class="dv">5</span>,<span class="dv">20</span>)) </code></pre></div>
+<p>The function takes as input the dataset <code>dat</code> and the vector of group labels <code>grp</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Test the equality of the covariance operators
+p =<span class="st"> </span><span class="kw">ksample.perm</span>(dat, grp, <span class="dt">part =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<p>The user can also choose the number of iterations of the permutation test <code>iter</code> (the default is <code>1000</code>), the distance between covariance operators <code>dist</code> (the default is <code>sq</code>, the square root distance) and the combining function to find the global p-value <code>comb</code> (the default is <code>tipp</code>, the Tippett combining function). If the data have already been centred around the mean, we suggest to set <code>cent = TRUE</code>. Moreover, if <code>part=FALSE</code>, this function returns only the global p-value. If <code>part=TRUE</code>, it returns a vector that contains both the global p-value (in <code>p$global</code>) and a list of partial p-values, one for each pairwise comparison (in <code>p$partial</code>).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p$global <span class="co"># global p-value</span></code></pre></div>
+<pre><code>## [1] 0</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p$partial <span class="co"># partial p-values</span></code></pre></div>
+<pre><code>##         dist p_value signif
+## 1-2 30.00486   0.000    ***
+## 1-3 28.78225   0.000    ***
+## 1-4 30.23026   0.075      .
+## 1-5 30.05272   0.000    ***
+## 2-3 26.96973   0.000    ***
+## 2-4 29.17826   0.000    ***
+## 2-5 27.55809   0.000    ***
+## 3-4 28.35040   0.000    ***
+## 3-5 26.81700   0.000    ***
+## 4-5 29.97638   0.000    ***</code></pre>
+<p>The values of the observed distances between each pair of covariance operators are also reported in the table. The user can also choose to adjust the p-values with the step-down method of Westfall and Young (1993) by setting <code>adj = TRUE</code> in <code>ksample.perm</code>. For more information about these options please see and Cabassi et al. (2017).</p>
+<p>The partial p-values can be plotted using the <code>perm.plot</code> function, that takes as input the list <code>p</code>, output by <code>perm.plot</code>, the number of groups and a vector of strings that indicate the class labels (optional):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">perm.plot</span>(p, <span class="dv">5</span>, <span class="dt">lab=</span><span class="kw">c</span>(<span class="st">'aa'</span>,<span class="st">'ao'</span>,<span class="st">'dcl'</span>,<span class="st">'iy'</span>,<span class="st">'sh'</span>)) <span class="co"># visualise partial p-values</span></code></pre></div>
+<p><img src="data:image/png;base64,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" style="display: block; margin: auto;" /> It is also possible to automatically save the figure by setting <code>save = TRUE</code>. The figure will be saved in <code>.eps</code> format. The name of the figure can be customised using the parameter <code>name</code>.</p>
+</div>
+<div id="two-sample-tests-for-gaussian-data" class="section level2">
+<h2><span class="header-section-number">1.3</span> Two sample tests for Gaussian data</h2>
+<p><code>ksample.gauss</code> and <code>ksample.vstab</code> are two methods detailed in Panaretos et al. (2010) that compare two samples of functional data for testing for equality of covariance operators. In this case, the data is assumed to be Gaussian. Considering the same phoneme data,</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Load in phoneme data</span>
+<span class="kw">library</span>(fds)
+<span class="co"># Set up test data</span>
+dat1 =<span class="st"> </span><span class="kw">t</span>(aa$y)[<span class="dv">1</span>:<span class="dv">20</span>,];
+dat2 =<span class="st"> </span><span class="kw">t</span>(sh$y)[<span class="dv">1</span>:<span class="dv">20</span>,];
+dat3 =<span class="st"> </span><span class="kw">t</span>(aa$y)[<span class="dv">21</span>:<span class="dv">40</span>,];</code></pre></div>
+<p>we can compare two sets of 20 observations corresponding to different phonemes and two sets of 20 observations from the same population of phonemes.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Compare two disimilar phonemes</span>
+<span class="co"># Resulting in a small p-value</span>
+<span class="kw">ksample.gauss</span>(dat1,dat2,<span class="dt">K=</span><span class="dv">5</span>);</code></pre></div>
+<pre><code>## [1] 0.0002660378</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ksample.vstab</span>(dat1,dat2,<span class="dt">K=</span><span class="dv">5</span>);</code></pre></div>
+<pre><code>## [1] 1.1825e-08</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Compare two sets of the same phonemes </span>
+<span class="co"># Resulting in a large p-value</span>
+<span class="kw">ksample.gauss</span>(dat1,dat3,<span class="dt">K=</span><span class="dv">5</span>);</code></pre></div>
+<pre><code>## [1] 0.5825128</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ksample.vstab</span>(dat1,dat3,<span class="dt">K=</span><span class="dv">5</span>);</code></pre></div>
+<pre><code>## [1] 0.4979127</code></pre>
+<p>In these examples, K=5 eigen-functions were used to reduce the data to a finite dimensional space. Then, a test statistic is constructed with asymptotic chi-squared distribution with K(K+1)/2 degrees of freedom. From there, the p-values are computed.</p>
+</div>
+</div>
+<div id="classification" class="section level1">
+<h1><span class="header-section-number">2</span> Classification</h1>
+<p><code>classif.com</code> trains a covariance operator based functional data classifier that makes use of concentration inequalities in the same way as the above <code>ksample.com</code> function. <code>predict.classif.com</code> expands upon the generic <code>predict</code> function for the classif.com class. It uses the previously trained classifier to classify new observations.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(fds);
+ <span class="co"># Setup training data</span>
+dat1 =<span class="st"> </span><span class="kw">rbind</span>( 
+  <span class="kw">t</span>(aa$y[,<span class="dv">1</span>:<span class="dv">100</span>]), <span class="kw">t</span>(ao$y[,<span class="dv">1</span>:<span class="dv">100</span>]), <span class="kw">t</span>(dcl$y[,<span class="dv">1</span>:<span class="dv">100</span>]), 
+  <span class="kw">t</span>(iy$y[,<span class="dv">1</span>:<span class="dv">100</span>]), <span class="kw">t</span>(sh$y[,<span class="dv">1</span>:<span class="dv">100</span>]) 
+);
+ <span class="co"># Setup testing data</span>
+dat2 =<span class="st"> </span><span class="kw">rbind</span>( 
+  <span class="kw">t</span>(aa$y[,<span class="dv">101</span>:<span class="dv">400</span>]), <span class="kw">t</span>(ao$y[,<span class="dv">101</span>:<span class="dv">400</span>]), <span class="kw">t</span>(dcl$y[,<span class="dv">101</span>:<span class="dv">400</span>]), 
+  <span class="kw">t</span>(iy$y[,<span class="dv">101</span>:<span class="dv">400</span>]), <span class="kw">t</span>(sh$y[,<span class="dv">101</span>:<span class="dv">400</span>]) 
+);
+
+datgrp =<span class="st"> </span><span class="kw">gl</span>(<span class="dv">5</span>,<span class="dv">100</span>);</code></pre></div>
+<p>Once the data has been read in, the classifier can be trained.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">clCom =<span class="st"> </span><span class="kw">classif.com</span>( datgrp, dat1 );</code></pre></div>
+<p>Subsequently, the class associated with new observations can be predicted based on the trained classifier.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">grp =<span class="st"> </span><span class="kw">predict</span>( clCom, dat2, <span class="dt">LOADING=</span><span class="ot">FALSE</span> );
+acc =<span class="st"> </span><span class="kw">c</span>(
+  <span class="kw">sum</span>( grp[<span class="dv">1</span>:<span class="dv">300</span>]==<span class="dv">1</span> ), <span class="kw">sum</span>( grp[<span class="dv">301</span>:<span class="dv">600</span>]==<span class="dv">2</span> ), <span class="kw">sum</span>( grp[<span class="dv">601</span>:<span class="dv">900</span>]==<span class="dv">3</span> ), 
+  <span class="kw">sum</span>( grp[<span class="dv">901</span>:<span class="dv">1200</span>]==<span class="dv">4</span> ), <span class="kw">sum</span>( grp[<span class="dv">1201</span>:<span class="dv">1500</span>]==<span class="dv">5</span> )
+)/<span class="dv">300</span>;
+<span class="kw">print</span>(<span class="kw">rbind</span>(<span class="kw">gl</span>(<span class="dv">5</span>,<span class="dv">1</span>),<span class="kw">signif</span>(acc,<span class="dv">3</span>)));</code></pre></div>
+<pre><code>##       [,1]  [,2] [,3]  [,4] [,5]
+## [1,] 1.000 2.000 3.00 4.000 5.00
+## [2,] 0.783 0.797 0.96 0.993 0.99</code></pre>
+</div>
+<div id="clustering" class="section level1">
+<h1><span class="header-section-number">3</span> Clustering</h1>
+<p><code>cluster.com</code> clusters sets of functional data via their covariance operators making use of an EM style algorithm with concentration inequalities. This method similarly is based on the same concentration paradigm as <code>ksample.com</code> and <code>classif.com</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Setup data to be clustered</span>
+dat  =<span class="st"> </span><span class="kw">rbind</span>( <span class="kw">t</span>(aa$y[,<span class="dv">1</span>:<span class="dv">20</span>]),<span class="kw">t</span>(iy$y[,<span class="dv">1</span>:<span class="dv">20</span>]),<span class="kw">t</span>(sh$y[,<span class="dv">1</span>:<span class="dv">20</span>]) );</code></pre></div>
+<p>Given the unlabelled phoneme data, the following method will assign categories to each entry given the preselected number of categories in the argument grpCnt.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Cluster data into three groups</span>
+clst =<span class="st"> </span><span class="kw">cluster.com</span>(dat,<span class="dt">grpCnt=</span><span class="dv">3</span>,<span class="dt">PRINTLK =</span> <span class="ot">FALSE</span>);
+<span class="kw">matrix</span>(clst,<span class="dv">3</span>,<span class="dv">20</span>,<span class="dt">byrow=</span><span class="ot">TRUE</span>);</code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10] [,11] [,12] [,13]
+## [1,]    1    1    1    1    1    1    1    1    1     1     1     1     1
+## [2,]    2    2    2    2    2    2    2    2    2     3     2     2     2
+## [3,]    3    3    3    3    3    3    3    3    3     3     3     3     3
+##      [,14] [,15] [,16] [,17] [,18] [,19] [,20]
+## [1,]     1     1     1     1     1     1     1
+## [2,]     2     2     2     3     2     2     3
+## [3,]     3     3     3     3     3     3     3</code></pre>
+<p>In this next example, groups of curves are clustered as units. That is, we begin with a sample of 120 observations in the variable dat. We next assign labels grouping each sequential set of four obervations as a single unit. In this way, the algorithm clusters based on 30 rank 4 empirical covariance operators instead of on 120 individual curves.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># cluster groups of curves</span>
+dat  =<span class="st"> </span><span class="kw">rbind</span>( <span class="kw">t</span>(aa$y[,<span class="dv">1</span>:<span class="dv">40</span>]),<span class="kw">t</span>(iy$y[,<span class="dv">1</span>:<span class="dv">40</span>]),<span class="kw">t</span>(sh$y[,<span class="dv">1</span>:<span class="dv">40</span>]) );
+lab  =<span class="st"> </span><span class="kw">gl</span>(<span class="dv">30</span>,<span class="dv">4</span>);
+<span class="co"># Cluster data into three groups</span>
+clst =<span class="st"> </span><span class="kw">cluster.com</span>(dat,<span class="dt">labl=</span>lab,<span class="dt">grpCnt=</span><span class="dv">3</span>,<span class="dt">PRINTLK =</span> <span class="ot">FALSE</span>);
+<span class="kw">matrix</span>(clst,<span class="dv">3</span>,<span class="dv">10</span>,<span class="dt">byrow=</span><span class="ot">TRUE</span>);</code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
+## [1,]    2    2    2    2    2    2    2    2    2     2
+## [2,]    1    1    1    1    1    1    1    1    1     1
+## [3,]    3    3    3    3    3    3    3    3    3     3</code></pre>
+</div>
+<div id="references" class="section level1">
+<h1><span class="header-section-number">4</span> References</h1>
+<p>Cabassi, A., Pigoli, D., Secchi, P., Carter, P. A. (2017). Permutation tests for the equality of covariance operators of functional data with applications to evolutionary biology. Electron. J. Statist. 11(2), pp.3815–3840.</p>
+<p>Kashlak, A.B., Aston, J.A. and Nickl, R., (2016). Inference on covariance operators via concentration inequalities: k-sample tests, classification, and clustering via Rademacher complexities. arXiv preprint arXiv:1604.06310.</p>
+<p>Panaretos, Victor M., David Kraus, and John H. Maddocks. “Second-order comparison of Gaussian random functions and the geometry of DNA minicircles.” Journal of the American Statistical Association 105.490 (2010): 670-682.</p>
+<p>Pigoli, D., Aston, J.A., Dryden, I.L. and Secchi, P., (2014). Distances and inference for covariance operators. Biometrika, 101(2), pp.409-422.</p>
+<p>Westfall, P. H. and Young, S. S. (1993). Resampling-based multiple testing: Examples and methods for p-value adjustment, volume 279. John Wiley &amp; Sons.</p>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

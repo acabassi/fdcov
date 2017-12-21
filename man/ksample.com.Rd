@@ -70,13 +70,12 @@ ksample.com(dat2,grp2);
 # Compare three phonemes (should return TRUE)
 ksample.com(dat3,grp3);
 }
-\author{
-Adam B Kashlak \email{ak852@cam.ac.uk}
-}
 \references{
 Kashlak, Adam B, John AD Aston, and Richard Nickl (2016).
   "Inference on covariance operators via concentration
   inequalities: k-sample tests, classification, and clustering via
   Rademacher complexities", (in review)
 }
-
+\author{
+Adam B Kashlak \email{kashlak@ualberta.ca}
+}

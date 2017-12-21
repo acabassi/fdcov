@@ -5,7 +5,6 @@
 # @return The global p-value and a vector of adjusted p-values
 # 
 # @author Alessandra Cabassi \email{alessandra.cabassi@mail.polimi.it} 
-# 
 
 FWE.maxT = function(T){
 

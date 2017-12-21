@@ -91,13 +91,12 @@ probability that the observed function belongs to a specific label.
  clst = cluster.com(dat);
 }
 }
-\author{
-Adam B Kashlak \email{ak852@cam.ac.uk}
-}
 \references{
 Kashlak, Adam B, John A D Aston, and Richard Nickl (2016).
   "Inference on covariance operators via concentration
   inequalities: k-sample tests, classification, and clustering via
   Rademacher complexities", in review
 }
-
+\author{
+Adam B Kashlak \email{kashlak@ualberta.ca}
+}
