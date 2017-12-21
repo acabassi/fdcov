@@ -69,7 +69,14 @@ p = ksample.perm(dat,grp,iter=2)
 }
 }
 \references{
-Pigoli, Davide, John A. D. Aston, Ian L. Dryden, and Piercesare Secchi (2014). "Distances and inference for covariance operators." Biometrika: 101(2):409–422.
+Cabassi, A., Pigoli, D., Secchi, P., Carter, P. A. (2017). 
+  Permutation tests for the equality of covariance operators of 
+  functional data with applications to evolutionary biology. 
+  Electron. J. Statist. 11(2), pp.3815--3840.
+
+  Pigoli, Davide, John A. D. Aston, Ian L. Dryden, and 
+  Piercesare Secchi (2014). "Distances and inference for 
+  covariance operators." Biometrika: 101(2):409–422.
 }
 \author{
 Alessandra Cabassi \email{alessandra.cabassi@mail.polimi.it}
